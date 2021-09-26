@@ -1,0 +1,73 @@
+﻿@model TicketMaker.Web.Models.TicketIssuer
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center m-5">
+    <h1 class="display-4">Bem vindo ao Ticket Maker!</h1>
+    <h4 class="m-4"><em>Seu emissor de tickets inteligente</em></h4>
+</div>
+
+
+<div class="container card pl-4 pr-4 pb-4 ticket-input col-sm-5">
+    <ul class="nav nav-tabs text-center mb-4" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="singleTab" aria-selected="true" data-tab-target="#singleNumber"
+                data-toggle="tab" role="tab" aria-controls="single" aria-selected="true">Número único</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="multipleTab" aria-selected="false" data-tab-target="#multipleNumbers"
+                data-toggle="tab" role="tab" aria-controls="multiple" aria-selected="false">Múltiplos números</a>
+        </li>
+    </ul>
+    <div class="text-center tab-content">
+        <div id="singleNumber" data-tab-content class="active">
+            <form asp-action="Single" asp-controller="Home" method="POST">
+                <div class="form-group">
+                    @if (TempData["EmptyTickets"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["EmptyTickets"]</div>
+                    }
+                    <div class="form-row">
+                        <label class="mr-sm-2 sr-only" for="inputTicket">Número de tickets:</label>
+                        <input asp-for="TicketQuantity" type="number" class="form-control"
+                            id="inputTicket">
+                    </div>
+                    <div class="m-2">
+                        @Html.CheckBoxFor(model => model.IsOrdered, htmlAttributes: new { @checked = true})
+                        <label class="form-check-label" for="defaultCheck1">
+                            Em ordem?
+                        </label>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-large text-light m-1">Vamos lá!</button>
+            </form>
+        </div>
+
+        <div id="multipleNumbers" data-tab-content>
+            <form asp-action="Multiple" asp-controller="Home" method="POST">
+                <div class="form-group">
+                    @if (TempData["EmptyTickets"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["EmptyTickets"]</div>
+                    }
+                    <div class="form-row mt-2 mb-2">
+                        <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Números por ticket:</label>
+                        <select asp-for="TicketNumbers" class="form-select mt-2 mb-2" id="inlineFormCustomSelect">
+                            <option selected>2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <div class="form-row mt-2 mb-2">
+                        <label class="mr-sm-2 sr-only" for="inputTicket">Quantidade de tickets:</label>
+                        <input asp-for="TicketQuantity" type="number" class="form-control"
+                            id="inputTicket">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-success btn-large text-light m-1">Vamos lá!</button>
+            </form>
+        </div>
+
+    </div>
+</div>

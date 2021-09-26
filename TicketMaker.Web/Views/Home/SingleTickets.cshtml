@@ -1,0 +1,31 @@
+@model TicketMaker.Web.Models.TicketIssuer
+
+<div class="ticket-area">
+    @foreach (var ticket in Model.Tickets)
+    {
+        <div class="ticket">
+            <div class="title bg-success">
+                Rifa do Seu Madruga!
+                Valendo 14 meses de aluguel!
+            </div>
+            <div class="content">
+                <div class="dollar text-success">
+                    $
+                </div>
+                <div class="disclaimer">
+                    O prêmio só terá validade até as 08h00 da manhã do dia seguinte pagável ao portador. Após esse horário o
+                    bilhete não terá mais validade e o prêmio acumulará!
+                </div>
+                <div class="dollar text-success">
+                    $
+                </div>
+            </div>
+            <div class="ticket-number-area bg-success">
+                <div class="ticket-number">
+                    #@ticket.NumberSet[0].ToString("d4")
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
